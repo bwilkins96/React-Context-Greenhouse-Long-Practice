@@ -1,0 +1,28 @@
+// Temperature has a default value of 50 degrees
+// Humidity has a default value of 40%
+
+import { createContext, useContext, useState } from "react";
+
+export const ClimateContext = createContext();
+
+export const ClimateHook = () => {
+    return useContext(ClimateContext);
+}
+
+export default function ClimateProvider({ children }) {
+    const [temp, setTemp] = useState(50);
+    const [humidity, setHumidity] = useState(40);
+
+    const value = {
+        temp,
+        setTemp,
+        humidity,
+        setHumidity
+    }
+
+    return (
+        <ClimateContext.Provider value={value}>
+            {children}
+        </ClimateContext.Provider>
+    );
+}
